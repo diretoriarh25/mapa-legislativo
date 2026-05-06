@@ -1,0 +1,17 @@
+[
+{
+"ID_Indicacao": 59,
+"Ano": 2025,
+"Data": "2025-02-17",
+"Vereador": "Zé Teixeira",
+"Tipo_Materia": "Indicação",
+"Descricao_Indicacao": "Manutenção da estrada do Carioca",
+"Bairro_Localidade": "Carioca",
+"Endereco_Referencia": "Estrada Principal",
+"Latitude": -12.194,
+"Longitude": -42.896,
+"Status": "Atendida",
+"Link_Indicacao_Portal": "https://google.com",
+"Foto": "vereadores/ze_teixeira.png"
+}
+]
