@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+
+<script>
+
+const map = L.map('map').setView([-12.191, -42.896], 11);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap'
+}).addTo(map);
+
+const markers = L.markerClusterGroup();
+
+fetch('dados.json')
+.then(response => response.json())
+.then(data => {
+
+    data.forEach(item => {
+
+        const icon = L.divIcon({
+            html: `
+                <div class="marker-photo">
+                    <img src="${item.Foto}">
+                </div>
+            `,
+            className: '',
+            iconSize: [45, 45]
+        });
+
+        const marker = L.marker([
+            item.Latitude,
+            item.Longitude
+        ], {
+            icon: icon
+        });
+
+        const popup = `
+            <div class="popup">
+                <img src="${item.Foto}">
+                <h3>${item.Tipo_Materia} Nº ${item.ID_Indicacao}/${item.Ano}</h3>
+
+                <p><strong>Vereador:</strong> ${item.Vereador}</p>
+                <p><strong>Data:</strong> ${item.Data}</p>
+                <p><strong>Bairro:</strong> ${item.Bairro_Localidade}</p>
+                <p><strong>Status:</strong> ${item.Status}</p>
+                <p>${item.Descricao_Indicacao}</p>
+
+                <a class="btn" target="_blank" href="${item.Link_Indicacao_Portal}">
+                    Mais Informações
+                </a>
+            </div>
+        `;
+
+        marker.bindPopup(popup);
+
+        markers.addLayer(marker);
+    });
+
+    map.addLayer(markers);
+});
+
+</script>
+
+</body>
+</html>
